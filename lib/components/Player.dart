@@ -47,13 +47,14 @@ class Player extends SpriteAnimationComponent with HasGameRef,HasHitboxes,Dragga
     if (parent is! GamePage) {
       return true;
     }
-    if(info.raw.globalPosition.dx > 0 && info.raw.globalPosition.dx < (gameRef.size.x-(283/3)) && info.raw.globalPosition.dy > 0 && info.raw.globalPosition.dx < (gameRef.size.y-(137/3))){
+    print(".........................Drag::"+info.raw.globalPosition.dx.toString());
+    print(".................................Game::"+gameRef.size.x.toString());
+    if(info.raw.globalPosition.dx >= size.x/2 && info.raw.globalPosition.dx <= (gameRef.size.x-size.x/2) &&
+    info.raw.globalPosition.dy >= size.y/2 && info.raw.globalPosition.dy <= (gameRef.size.y-size.y/2)){
       final dragDeltaPosition = this.dragDeltaPosition;
       if (dragDeltaPosition == null) {
         return false;
       }
-      print(".........................Drag::"+info.raw.globalPosition.dy.toString());
-      print(".................................Game::"+gameRef.size.y.toString());
       position.setFrom(info.eventPosition.game - dragDeltaPosition);
       return false;
     }
