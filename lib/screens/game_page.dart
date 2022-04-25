@@ -15,7 +15,7 @@ import '../components/enemy.dart';
 import '../components/enemy_manager.dart';
 
 
-class GamePage extends FlameGame with HasDraggables{
+class GamePage extends FlameGame with HasDraggables,HasCollidables {
   final Player _player = Player();
   late BulletManager _bulletManager;
   late EnemyManager _enemyManager;
@@ -34,7 +34,7 @@ class GamePage extends FlameGame with HasDraggables{
   void update(double dt) {
     super.update(dt);
     _bulletManager.playersPosition = _player.position.clone()+Vector2(40,0);
-    final bullets = _bulletManager.children.whereType<Bullet>();
+    /*final bullets = _bulletManager.children.whereType<Bullet>();
     final enemys = _enemyManager.children.whereType<Enemy>();
     for(var enemy in enemys){
       if(enemy.shouldRemove){
@@ -53,6 +53,6 @@ class GamePage extends FlameGame with HasDraggables{
       if(_player.containsPoint(enemy.absoluteCenter)){
         //TODO("Colide with player ")
       }
-    }
+    }*/
   }
 }

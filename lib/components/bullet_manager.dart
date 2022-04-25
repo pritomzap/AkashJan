@@ -10,7 +10,7 @@ class BulletManager extends Component with HasGameRef{
   }
 
   void _triggerNewBullet() async{
-    Sprite _bulletSprite = await gameRef.loadSprite('blue_lvl_1.png');
+    Sprite _bulletSprite = await gameRef.loadSprite('bullets/blue_lvl_1.png');
     _bulletSprite.srcSize = Vector2.all(126);
     Bullet bullet = Bullet(
         sprite: _bulletSprite,

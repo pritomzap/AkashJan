@@ -6,6 +6,8 @@ import 'package:akashjan/constants/Constants.dart';
 import 'package:akashjan/screens/game_page.dart';
 import 'package:flame/components.dart';
 import 'package:flame/sprite.dart';
+import 'package:akashjan/constants/Constants.dart';
+import 'explossion.dart';
 
 class EnemyManager extends Component with HasGameRef<GamePage>{
   late Timer _timer;
@@ -18,7 +20,7 @@ class EnemyManager extends Component with HasGameRef<GamePage>{
   void _spawnEnemy() async{
     Vector2 position = Vector2(_random.nextDouble()*gameRef.size.x,0);
     SpriteAnimation enemyAnimation = await _getEnemy1();
-    Enemy enemy = Enemy(position,enemyAnimation);
+    Enemy enemy = Enemy(position,enemyAnimation,_onEnemyCollision);
     add(enemy);
   }
   @override
@@ -46,5 +48,15 @@ class EnemyManager extends Component with HasGameRef<GamePage>{
       srcSize: Vector2(1024, 1024),
     );
     return spriteSheet.createAnimation(row: 0, stepTime: enemy1AnimationSpeed, to: 3);
+  }
+
+  void _onEnemyCollision(Vector2 point) async{
+    final spriteSheet = SpriteSheet(
+        image: await gameRef.images.load('explossion_1.png'),
+        srcSize: Vector2(142, 200),
+    );
+    var explossionAnimation = spriteSheet.createAnimation(row: 0, stepTime: explossionSpeed, to: 17,loop: false);
+    Explossion explossion = Explossion(point-Vector2(25,20), explossionAnimation);
+    add(explossion);
   }
 }

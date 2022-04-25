@@ -1,4 +1,5 @@
 import 'package:akashjan/constants/enums.dart';
+import 'package:akashjan/constants/environment.dart';
 import 'package:flame/components.dart';
 import 'package:flame/geometry.dart';
 import 'package:flame/sprite.dart';
@@ -6,7 +7,7 @@ import 'package:flutter/material.dart' hide Draggable;
 import 'package:flame/input.dart';
 import '../screens/game_page.dart';
 
-class Player extends SpriteAnimationComponent with HasGameRef,HasHitboxes,Draggable {
+class Player extends SpriteAnimationComponent with HasGameRef,HasHitboxes,Draggable,Collidable{
   Player() : super(size: Vector2(283/3, 137/3)){
     addHitbox(HitboxRectangle());
   }
@@ -15,12 +16,20 @@ class Player extends SpriteAnimationComponent with HasGameRef,HasHitboxes,Dragga
   late final SpriteAnimation _standingAnimation;
   final double _animationSpeed = 0.05;
   Vector2? dragDeltaPosition;
+  final _shape = HitboxCircle(normalizedRadius: 0.5);
 
   @override
   Future<void> onLoad() async {
     super.onLoad();
     position = gameRef.size/2;
     _loadAnimations().then((_) => {animation = _standingAnimation});
+  }
+  @override
+  void onMount() {
+    // TODO: implement onMount
+    super.onMount();
+    if(Environment.instance.isHitBoxStrokeEnable)
+      addHitbox(_shape);
   }
 
   @override
@@ -40,6 +49,12 @@ class Player extends SpriteAnimationComponent with HasGameRef,HasHitboxes,Dragga
   bool onDragStart(int pointerId, DragStartInfo info) {
     dragDeltaPosition = info.eventPosition.game - position;
     return false;
+  }
+
+  @override
+  void onCollision(Set<Vector2> intersectionPoints, Collidable other) {
+    // TODO: implement onCollision
+    super.onCollision(intersectionPoints, other);
   }
 
   @override
@@ -71,4 +86,12 @@ class Player extends SpriteAnimationComponent with HasGameRef,HasHitboxes,Dragga
     return false;
   }
 
+  @override
+  void render(Canvas canvas) {
+    // TODO: implement render
+    super.render(canvas);
+    try{
+      _shape.render(canvas, Environment.instance.getHitBoxStroke());
+    }catch(e){}
+  }
 }
