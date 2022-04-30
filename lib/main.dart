@@ -1,4 +1,5 @@
-import 'package:akashjan/screens/main_game_page_screen.dart';
+import 'package:akashjan/screens/game_play_screen.dart';
+import 'package:akashjan/screens/start_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flame/flame.dart';
 
@@ -16,7 +17,8 @@ class AkashJanGame extends StatelessWidget {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Akash Jan',
-      home: MainGamePageScreen(),
+      //home: MainGamePageScreen(),
+      home: StartScreen(),
     );
   }
 }

@@ -1,17 +1,9 @@
-import 'dart:math';
-
 import 'package:akashjan/components/Player.dart';
-import 'package:akashjan/components/bullet.dart';
-import 'package:akashjan/components/enemy.dart';
-import 'package:akashjan/constants/enums.dart';
 import 'package:flame/components.dart';
-import 'package:flame/flame.dart';
 import 'package:flame/game.dart';
 import 'package:flame/input.dart';
 
-import '../components/bullet.dart';
 import '../components/bullet_manager.dart';
-import '../components/enemy.dart';
 import '../components/enemy_manager.dart';
 
 
