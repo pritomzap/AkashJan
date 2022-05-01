@@ -52,11 +52,11 @@ class EnemyManager extends Component with HasGameRef<GamePage>{
 
   void _onEnemyCollision(Vector2 point) async{
     final spriteSheet = SpriteSheet(
-        image: await gameRef.images.load('explossion_1.png'),
-        srcSize: Vector2(142, 200),
+        image: await gameRef.images.load('explossion_2.png'),
+        srcSize: Vector2(96, 96),
     );
     var explossionAnimation = spriteSheet.createAnimation(row: 0, stepTime: explossionSpeed, to: 17,loop: false);
-    Explossion explossion = Explossion(point-Vector2(25,20), explossionAnimation);
+    Explossion explossion = Explossion(point-Vector2(35,22), explossionAnimation);
     add(explossion);
   }
 }
