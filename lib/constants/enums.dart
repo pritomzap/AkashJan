@@ -9,3 +9,11 @@ enum Direction {
   bottomLeft,
   none
 }
+enum PowerUps{
+  bulletSpeed,
+  healthRestore,
+  megaBomb,
+  missaile,
+  shield,
+  laser
+}

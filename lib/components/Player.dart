@@ -1,3 +1,4 @@
+import 'package:akashjan/components/power_up.dart';
 import 'package:akashjan/constants/enums.dart';
 import 'package:akashjan/constants/environment.dart';
 import 'package:flame/components.dart';
@@ -17,6 +18,7 @@ class Player extends SpriteAnimationComponent with HasGameRef,HasHitboxes,Dragga
   final double _animationSpeed = 0.05;
   Vector2? dragDeltaPosition;
   final _shape = HitboxCircle(normalizedRadius: 0.5);
+  Function? _onColideWithPowerUps = null;
 
   @override
   Future<void> onLoad() async {
@@ -53,8 +55,10 @@ class Player extends SpriteAnimationComponent with HasGameRef,HasHitboxes,Dragga
 
   @override
   void onCollision(Set<Vector2> intersectionPoints, Collidable other) {
-    // TODO: implement onCollision
     super.onCollision(intersectionPoints, other);
+    if(other is PowerUp){
+      _onColideWithPowerUps?.call();
+    }
   }
 
   @override
@@ -93,5 +97,9 @@ class Player extends SpriteAnimationComponent with HasGameRef,HasHitboxes,Dragga
     try{
       _shape.render(canvas, Environment.instance.getHitBoxStroke());
     }catch(e){}
+  }
+
+  set onColideWithPowerUps(Function value) {
+    _onColideWithPowerUps = value;
   }
 }

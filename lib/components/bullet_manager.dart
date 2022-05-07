@@ -4,9 +4,10 @@ import 'package:flame/components.dart';
 class BulletManager extends Component with HasGameRef{
   late Timer _timer;
   Vector2 _playersPosition;
+  double _bulletSpawnTime = 0.5;
 
   BulletManager(this._playersPosition):super(){
-    _timer = Timer(0.5,onTick: _triggerNewBullet,repeat: true);
+    _timer = Timer(_bulletSpawnTime,onTick: _triggerNewBullet,repeat: true);
   }
 
   void _triggerNewBullet() async{
@@ -40,4 +41,13 @@ class BulletManager extends Component with HasGameRef{
   set playersPosition(Vector2 value) {
     _playersPosition = value;
   }
+
+  set bulletSpawnTime(double value) {
+    _bulletSpawnTime = value;
+    _timer.stop();
+    _timer = Timer(_bulletSpawnTime,onTick: _triggerNewBullet,repeat: true);
+    _timer.start();
+  }
+
+  double get bulletSpawnTime => _bulletSpawnTime;
 }
