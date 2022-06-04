@@ -1,5 +1,7 @@
 ## AkashJan (আকাশযান)
-
+<p align="center">
+  <img width="600" height="200" src="assets/images/ic_main_logo.png">
+</p>
 A 2D infinite scroller made using [Flame](https://flame-engine.org/) engine.
 
 ## Demo
