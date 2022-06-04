@@ -22,7 +22,6 @@ class Bullet extends SpriteComponent with HasHitboxes, Collidable{
 
   @override
   void onMount() {
-    // TODO: implement onMount
     super.onMount();
     if(Environment.instance.isHitBoxStrokeEnable)
       addHitbox(_shape);
@@ -30,7 +29,6 @@ class Bullet extends SpriteComponent with HasHitboxes, Collidable{
 
   @override
   void render(Canvas canvas) {
-    // TODO: implement render
     super.render(canvas);
     try{
       _shape.render(canvas, Environment.instance.getHitBoxStroke());
@@ -39,7 +37,6 @@ class Bullet extends SpriteComponent with HasHitboxes, Collidable{
 
   @override
   void onCollision(Set<Vector2> intersectionPoints, Collidable other) {
-    // TODO: implement onCollision
     super.onCollision(intersectionPoints, other);
     if(other is Enemy){
       removeFromParent();
@@ -48,7 +45,6 @@ class Bullet extends SpriteComponent with HasHitboxes, Collidable{
 
   @override
   void update(double dt) {
-    // TODO: implement update
     super.update(dt);
     this.position += Vector2(0,-1)*bulletSpeed*dt;
     if(this.position.y < 0){

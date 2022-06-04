@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:akashjan/constants/Dimens.dart';
 import 'package:akashjan/constants/environment.dart';
+import 'package:akashjan/screens/game_page.dart';
 import 'package:flame/components.dart';
 import 'package:flame/geometry.dart';
 import 'package:flame/sprite.dart';
@@ -36,6 +37,7 @@ class Enemy extends SpriteAnimationComponent with HasHitboxes,HasGameRef,Collida
     super.onCollision(intersectionPoints, other);
     if(other is Bullet){
       removeFromParent();
+      (gameRef as GamePage).player.playerScore += 1;
       _onCollide.call(intersectionPoints.first);
     }
   }

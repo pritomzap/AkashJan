@@ -1,3 +1,4 @@
+import 'dart:ui';
 import 'package:akashjan/components/Player.dart';
 import 'package:akashjan/constants/enums.dart';
 import 'package:flame/components.dart';
@@ -9,11 +10,13 @@ import '../components/enemy_manager.dart';
 import '../components/power_up_manager.dart';
 
 
+
 class GamePage extends FlameGame with HasDraggables,HasCollidables {
   final Player _player = Player();
   late BulletManager _bulletManager;
   late EnemyManager _enemyManager;
   late PowerUpManager _powerUpManager;
+  late TextComponent _scoreTextComponent;
 
   @override
   Future<void>? onLoad() async{
@@ -25,6 +28,8 @@ class GamePage extends FlameGame with HasDraggables,HasCollidables {
     _bulletManager = BulletManager(_player.position.clone()-Vector2(20,0));
     add(_bulletManager);
     _player.onColideWithPowerUps = _onColideWithPowerUps;
+    _scoreTextComponent = TextComponent(text: 'Score: 0',position: Vector2(10,10));
+    add(_scoreTextComponent);
     return super.onLoad();
   }
 
@@ -32,6 +37,7 @@ class GamePage extends FlameGame with HasDraggables,HasCollidables {
   void update(double dt) {
     super.update(dt);
     _bulletManager.playersPosition = _player.position.clone()+Vector2(40,0);
+    _scoreTextComponent.text = 'Score: ${_player.playerScore}';
     /*final bullets = _bulletManager.children.whereType<Bullet>();
     final enemys = _enemyManager.children.whereType<Enemy>();
     for(var enemy in enemys){
@@ -66,4 +72,7 @@ class GamePage extends FlameGame with HasDraggables,HasCollidables {
       }
     }
   }
+
+  Player get player => _player;
+
 }

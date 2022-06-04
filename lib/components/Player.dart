@@ -2,11 +2,13 @@ import 'package:akashjan/components/power_up.dart';
 import 'package:akashjan/constants/enums.dart';
 import 'package:akashjan/constants/environment.dart';
 import 'package:flame/components.dart';
+import 'package:flame/effects.dart';
 import 'package:flame/geometry.dart';
 import 'package:flame/sprite.dart';
 import 'package:flutter/material.dart' hide Draggable;
 import 'package:flame/input.dart';
 import '../screens/game_page.dart';
+import 'enemy.dart';
 
 class Player extends SpriteAnimationComponent with HasGameRef,HasHitboxes,Draggable,Collidable{
   Player() : super(size: Vector2(283/3, 137/3)){
@@ -19,6 +21,7 @@ class Player extends SpriteAnimationComponent with HasGameRef,HasHitboxes,Dragga
   Vector2? dragDeltaPosition;
   final _shape = HitboxCircle(normalizedRadius: 0.5);
   Function? _onColideWithPowerUps = null;
+  int _playerScore = 0;
 
   @override
   Future<void> onLoad() async {
@@ -58,6 +61,9 @@ class Player extends SpriteAnimationComponent with HasGameRef,HasHitboxes,Dragga
     super.onCollision(intersectionPoints, other);
     if(other is PowerUp){
       _onColideWithPowerUps?.call();
+    } else if(other is Enemy){
+      final effect = OpacityEffect.to(0.5, EffectController(duration: 0.2,repeatCount: 3));
+      add(effect);
     }
   }
 
@@ -101,5 +107,11 @@ class Player extends SpriteAnimationComponent with HasGameRef,HasHitboxes,Dragga
 
   set onColideWithPowerUps(Function value) {
     _onColideWithPowerUps = value;
+  }
+
+  int get playerScore => _playerScore;
+
+  set playerScore(int value) {
+    _playerScore = value;
   }
 }

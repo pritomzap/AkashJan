@@ -25,19 +25,16 @@ class EnemyManager extends Component with HasGameRef<GamePage>{
   }
   @override
   void onMount() {
-    // TODO: implement onMount
     super.onMount();
     _timer.start();
   }
   @override
   void onRemove() {
-    // TODO: implement onRemove
     super.onRemove();
     _timer.stop();
   }
   @override
   void update(double dt) {
-    // TODO: implement update
     super.update(dt);
     _timer.update(dt);
   }
