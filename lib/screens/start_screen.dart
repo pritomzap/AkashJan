@@ -2,6 +2,7 @@ import 'dart:html';
 import 'dart:ui';
 
 import 'package:akashjan/screens/game_play_screen.dart';
+import 'package:akashjan/screens/selection_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:akashjan/constants/Dimens.dart';
@@ -38,7 +39,7 @@ class _StartScreenState extends State<StartScreen> {
                     onTap:(){
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => const MainGamePageScreen()),
+                        MaterialPageRoute(builder: (context) => const SelectionScreen()),
                       );
                     } ,
                     child: Image.asset('images/menus/play.png',width: menuHeight)
